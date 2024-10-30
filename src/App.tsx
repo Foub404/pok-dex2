@@ -1,7 +1,24 @@
+import "./App.css";
 import PokemonCard from "./Components/PokemonCard";
+import NavBar from "./Components/NavBar/NavBar";
 import { useState } from "react";
+
+function App() {
+  const [pokemonIndex, setPokemonIndex] = useState(0);
+  return (
+    <div>
+      <NavBar
+        pokemonIndex={pokemonIndex}
+        setPokemonIndex={setPokemonIndex}
+        pokemonList={pokemonList}
+      />
+      <PokemonCard pokemon={pokemonList[pokemonIndex]} />
+    </div>
+  );
+}
+
 const pokemonList = [
-{
+  {
     name: "bulbasaur",
     imgSrc:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
@@ -25,34 +42,5 @@ const pokemonList = [
     name: "mew",
   },
 ];
-function App() {
-    const [pokemonIndex, setPokemonIndex] = useState(0);
-    function handleClickPreviews() {
-        setPokemonIndex(pokemonIndex - 1);
-    }
-    function handleClickNext() {
-        setPokemonIndex(pokemonIndex + 1);
-    }
-    return (
-        <div>
-            <PokemonCard pokemon={pokemonList[pokemonIndex]} />
-            {pokemonIndex > 0 ? (
-                <button type="button" onClick={handleClickPreviews}>
-                    {" "}
-                    Precedent{" "}
-                </button>
-            ) : (
-                ""
-            )}
-            {pokemonIndex < pokemonList.length - 1 ? (
-                <button type="button" onClick={handleClickNext}>
-                    {" "}
-                    Suivant{" "}
-                </button>
-            ) : (
-                ""
-            )}
-        </div>
-    );
-}
+
 export default App;
